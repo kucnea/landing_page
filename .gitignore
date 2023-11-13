@@ -15,7 +15,7 @@
 # production
 /build
 
-# misc
+# miscnpm 
 .DS_Store
 *.pem
 
@@ -33,3 +33,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# .env
+# .env.
+# .env.production
+# .env.development
