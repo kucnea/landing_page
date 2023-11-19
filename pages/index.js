@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import Image from 'next/image'
 import Link from 'next/link';
+import Ceo from './board/introduce/Ceo'
+import InputForm from './board/offer/InputForm'
 import front_img1 from '/public/image/LogoMinho_noBack_wide.png'
 import front_img2 from '/public/image/workingRst_1.png'
 import front_img3 from '/public/image/workingRst_2.png'
@@ -15,22 +17,33 @@ import kakao from '/public/image/kakao.png'
 export default function Index() {
 
   const [currentImage, setCurrentImage] = useState(0);
+  const [currentComponent, setCurrentComponent] = useState(0);
+
   const images = [
      { src: front_img1, alt: "frontImg_1" },
      { src: front_img2, alt: "frontImg_2" },
      { src: front_img3, alt: "frontImg_3" },
   ];
-
-  // <p className="text-green-400">$ minho install all</p>
-  // <p className="text-white">+ minho@23.11.13</p>
-  // <p className="text-white">added 1 package, and audited 2 packages in 3s</p>
-  // <p className="text-green-400">$ input every thing</p>
-  const textsConsole = [
-    { text : "$ minho install all" },
-    { text : "+ minho@23.11.13"},
-    { text : "added 1 package, and audited 2 packages in 3s"},
-    { text : "$ input every thing" },
+  const components = [
+    { comp : <Ceo/> },
+    { comp : <Ceo/> },
+    { comp : <InputForm/> },
   ]
+
+  function clickMenu(i){
+    if( i == 1){
+      window.location.href = '/board/funThings/DashBoard'
+    }
+    setCurrentComponent(i);
+    console.log(currentComponent);
+  }
+
+  function SelectComponent(){
+    if( currentComponent >= 0 && currentComponent <= components.length )
+      return components[currentComponent].comp;
+    else 
+      return null;
+  }
 
   function moveIndexImg(){
     if(currentImage==0){
@@ -82,14 +95,16 @@ export default function Index() {
              </div>
              <div className="w-full max-w-full space-y-4 mx-auto">
                <div className="grid grid-cols-3 gap-8">
-                 <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
+                 <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg"
+                      onClick={()=>clickMenu(0)}>
                    <Image src={navi_icon_1} alt='개발자 이력 소개' style={{width: '40%', height: '40%'}}/>
                    <h2 className="text-xl font-bold text-white">개발자 이력 소개</h2>
                    <p className="text-zinc-200 dark:text-zinc-100">
                      개발자의 작업 경험과 간단한 이력사항 보유 기술을 보여드립니다.
                    </p>
                  </div>
-                 <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
+                 <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg"
+                      onClick={()=>clickMenu(1)}>
                    <Image src={navi_icon_3} alt='즐길거리' style={{width: '40%', height: '40%'}}/>
                    <h2 className="text-xl font-bold text-white">즐길거리</h2>
                    <p className="text-zinc-200 dark:text-zinc-100">
@@ -97,7 +112,8 @@ export default function Index() {
                      ( 현재 준비중 )
                    </p>
                  </div>
-                 <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg">
+                 <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg"
+                      onClick={()=>clickMenu(2)}>
                    <Image src={navi_icon_4} alt='문의/제안/의뢰' style={{width: '40%', height: '40%'}}/>
                    <h2 className="text-xl font-bold text-white">문의 및 제안</h2>
                    <p className="text-zinc-200 dark:text-zinc-100">
@@ -133,22 +149,12 @@ export default function Index() {
                </div>
              </div>
 
-             <aside className="bg-black text-white p-6 rounded-lg w-full max-w-lg font-mono" style={{width: '100%'}}>
-              <div className="flex justify-between items-center">
-                <div className="flex space-x-2 text-red-500">
-                  <div className="w-3 h-3 rounded-full bg-red-500" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500" />
-                  <div className="w-3 h-3 rounded-full bg-green-500" />
-                </div>
-                <p className="text-sm">bash</p>
-              </div>
-              <div className="mt-4">
-                <p className="text-green-400">$ minho install all</p>
-                <p className="text-white">+ minho@23.11.13</p>
-                <p className="text-white">added 1 package, and audited 2 packages in 3s</p>
-                <p className="text-green-400">$ input every thing</p>
-              </div>
-             </aside>
+             <div style={{display:'flex',justifyContent:'center'}}>
+              <SelectComponent/>
+             </div>
+
+
+
 
            </div>
          </div>
