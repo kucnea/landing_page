@@ -3,6 +3,10 @@ import Link from "next/link"
 import FunNavi from "./FunNavi"
 import DashBoardMain from "./DashBoardContents/DashBoardMain"
 import GameScreen from './DashBoardContents/Game/GameScreen'
+import WorldCupPreStart from './DashBoardContents/Ideal type world cup/WorldCupPreStart'
+import ChatRoom from './DashBoardContents/ChatRoom'
+import JoinForm from './DashBoardContents/JoinForm'
+import WorldCupScreen from './DashBoardContents/Ideal type world cup/WorldCupScreen'
 
 export default function Component() {
 
@@ -10,12 +14,15 @@ export default function Component() {
 
     const components =[
         { comp : <DashBoardMain/> },
+        { comp : <JoinForm/>},  
         { comp : <GameScreen/> },
-        
+        { comp : <WorldCupScreen/> },
+        { comp : <ChatRoom/> },
+        { comp : <JoinForm/>},
     ]
 
-    function selectComponent(i){
-        setComponentIdx(i);
+    const handleChangeComponentIdx = (i) => {
+      setComponentIdx(i);
     }
 
     function ShowComponent(){
@@ -31,10 +38,10 @@ export default function Component() {
     })
 
   return (
-    <div className="flex h-screen overflow-hidden">
-      <FunNavi/>
-      
-      <main className="flex-1 bg-gray-100 p-6">
+    <div className="flex h-screen">
+      <FunNavi onChangeCompIdx={handleChangeComponentIdx}/>
+      {/* 여기같음 */}
+      <main className="flex-1 bg-gray-100 p-6 overflow-hidden overflow-y-auto">
         <ShowComponent/>
       </main>
     </div>

@@ -1,19 +1,34 @@
 import Link from "next/link"
 
-export default function FunNavi(){
+export default function FunNavi({ onChangeCompIdx }){
     return(
         <aside className="w-64 bg-gray-800 text-white p-6">
-            <h1 className="text-2xl mb-4">Minho Board</h1>
+            <h1 className="text-2xl mb-4" onClick={()=>onChangeCompIdx(0)}>Minho Board</h1>
             <nav>
-                <Link className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#">
+                <div className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#"
+                        onClick={()=>onChangeCompIdx(1)}>
+                    Join Me
+                </div>
+                <div className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#"
+                        onClick={()=>onChangeCompIdx(2)}>
                     Game
-                </Link>
-                <Link className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#">
+                </div>
+                <div className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#"
+                        onClick={()=>onChangeCompIdx(3)}>
+                    ideal type world cup
+                </div>
+                <div className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#"
+                        onClick={()=>onChangeCompIdx(4)}>
                     Chat
-                </Link>
-                <Link className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#">
+                </div>
+                <div className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#"
+                        onClick={()=>onChangeCompIdx(5)}>
+                    Join Me
+                </div>
+                {/* <div className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700" href="#"
+                        onClick={()=>onChangeCompIdx(0)}>
                     Info
-                </Link>
+                </div> */}
             </nav>
         </aside>
     )

@@ -23,7 +23,9 @@
     "paths": {
       "@/*": ["./*"],
       "@lib/*": ["lib/*"],
-      "@public/*":["public/*"]
+      "@public/*":["public/*"],
+      "@components/*":["components/*"],
+      "@worldcup/*":["public/games/worldCup/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

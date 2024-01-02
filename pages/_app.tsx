@@ -4,8 +4,13 @@ import Head from 'next/head';
 // import Footer from './layouts/Footer.js';
 import '../public/styles/globals.css';
 import '../public/styles/k.css';
+import '../public/styles/minho.css'
+import useLayoutState from '@lib/hooks/site/useLayoutState'
 
 const App = ({ Component, pageProps }: AppProps):JSX.Element => {
+
+  const { headerState, footerState, useLayout, unUseLayout } = useLayoutState();
+  
   return (
     <>
     <div>
