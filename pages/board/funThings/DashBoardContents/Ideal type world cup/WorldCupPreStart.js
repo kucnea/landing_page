@@ -7,17 +7,17 @@ export default function WorldCupPreStart({ onChangeGameState, onChangeGameTitle 
         {label: 'label 1', value: 'value 1'},
         {label: 'label 2', value: 'value 2'},
     ]
-    // const [selectedTitle,setSelectedTitle] = useState();
+    const [selectedTitle,setSelectedTitle] = useState();
 
     const handleSelect = (state) => {
-        // setSelectedTitle(state);
-        console.log("run? state : "+state)
+        setSelectedTitle(state);
+        console.log("[WorldCupPreState.js] handleSelect() : "+state)
         onChangeGameTitle(state);
     }
 
-    // useEffect(()=>{
+    useEffect(()=>{
         
-    // },[]);
+    },[selectedTitle]);
 
     return (
         <div className='flex items-center justify-evenly min-h-4/5'

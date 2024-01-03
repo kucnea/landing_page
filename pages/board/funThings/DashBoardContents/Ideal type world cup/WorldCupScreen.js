@@ -29,7 +29,7 @@ export default function WorldCupScreen(){
             case 'normal': 
                 return <WorldCupPreStart onChangeGameState={handleChangeGameState} onChangeGameTitle={handleChangeGameTitleState}/>;
             case 'inGame':
-                return <WorldCupIngame onChangeGameState={handleChangeGameState}/>
+                return <WorldCupIngame onChangeGameState={handleChangeGameState} gameTitle={gameTitle}/>
             case 'inputWorldCup':
                 return <WorldCupInput onChangeGameState={handleChangeGameState}/>
             default:
@@ -39,8 +39,8 @@ export default function WorldCupScreen(){
       }
 
     useEffect(()=>{
-        console.log("select title : "+gameTitle);
-    },[gameTitle]);
+        console.log("[WorldCupScreen.js] select gameState : "+gameState+", gameTitle : "+gameTitle);
+    },[gameState, gameTitle]);
 
     return (
         <div className='bg-gray-100'>

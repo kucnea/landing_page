@@ -15,9 +15,12 @@ export default function WorldCupCard({ card, direction, isClick }){
     const [backgroundColor,setBackgroundColor] = useState(direction == 'l' ? '#d09da6' : '#42678e');
     
     const [innerSizeControll,setInnerSizeControll] = useState({
-        heightPic: '50%',
+        // heightPic: '50%',
+        heightPic: window.innerHeight * ( 0.8 ) * ( 0.5 ) + 'px',
         heightText: '50%',
-    })
+    });
+
+    const [marginTopPic,setMarginTopPic] = useState('3%');
 
     const [cardSize,setCardSize] = useState({ width: window.innerWidth, height: window.innerHeight });
 
@@ -66,6 +69,11 @@ export default function WorldCupCard({ card, direction, isClick }){
               width: window.innerWidth * 0.3+'px',
               height: window.innerHeight * 0.8+'px',
             });
+            setInnerSizeControll({
+                widthPic: window.innerWidth * ( 0.3 ) * ( 0.3 ) + 'px',
+                heightPic: window.innerHeight * ( 0.8 ) * ( 0.5 ) + 'px',
+                heightText: '50%',
+            });
           };
 
           handleResize();
@@ -104,25 +112,32 @@ export default function WorldCupCard({ card, direction, isClick }){
 
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+            setMarginTopPic('0');
+
             for(var i = 1 ; i <= 50 ; i++ ){
 
                 await delay(10);
-                
-                // setTimeout(()=>{
-                setCardSize({
-                    width: window.innerWidth * (0.3 + (0.002)*i)+'px',
-                    height: window.innerHeight * (0.8 + (0.004)*i)+'px',  
-                });
+
+                // setCardSize({
+                //     width: window.innerWidth * (0.3 + (0.002)*i)+'px',
+                //     height: window.innerHeight * (0.8 + (0.004)*i)+'px',  
+                // });
                 
                 setBackgroundColor(
                     i%2 == 0 ? direction == 'l' ? '#d09da6' : '#42678e' : 'white',
                 );
 
                 setInnerSizeControll({
-                    heightPic: 50 + (0.6)*i + '%',
-                    heightText: 50 - i + '%',
-                })
-                // }, i * 10);   
+                    // heightPic: 50 + (0.6)*i + '%',
+
+                    // heightPic: 50 + (0.89)*i + '%',
+                    // heightText: 50 - i + '%',
+
+                    // widthPic: window.innerWidth * ( 0.3 ) * ( 0.3 + ( 0.14 )*i ) + 'px',
+                    heightPic: window.innerHeight * ( 0.8 ) * ( 0.5 + ( 0.01 )*i ) + 'px',
+                    heightText: '50%',
+                });
+
             }
 
         }
@@ -142,7 +157,8 @@ export default function WorldCupCard({ card, direction, isClick }){
                 style={{width: cardSize.width,height: cardSize.height,backgroundColor:backgroundColor,borderColor:optionalBorderColor}}
         >
             {/* <div className='inline-block w-full h-full bg-contain bg-center bg-no-repeat' style={card.style}/> */}
-            <div className='mt-3' style={{position:'relative',minWidth:'100%',minHeight:innerSizeControll.heightPic}}>
+            <div className='mt-3' style={{position:'relative',minWidth:'100%',minHeight:innerSizeControll.heightPic, marginTop: marginTopPic}}>
+            {/* <div className='mt-3' style={{position:'relative',width:innerSizeControll.widthPic, height:innerSizeControll.heightPic}}> */}
                 <Image src={card.src}
                         alt="hi"
                         layout="fill"

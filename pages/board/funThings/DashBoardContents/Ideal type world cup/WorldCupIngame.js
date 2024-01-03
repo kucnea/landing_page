@@ -3,9 +3,9 @@ import Card from './WorldCupCard';
 import HakgyoansimDoldamM from '@public/styles/minho.css'
 import Image from 'next/image'
 
-export default function WorldCupScreen(){
+export default function WorldCupIngame({onChangeGameState, gameTitle}){
 
-    const [stateGame,setStateGame] = useState('');
+    const [numStage,setNumStage] = useState(0);
     const [isClick,setIsClick] = useState('');
 
     const cardContainerRef_left = useRef(null);
@@ -237,9 +237,11 @@ export default function WorldCupScreen(){
             for(var i = 1 ; i <= 50 ; i++ ){
             
                 const isLastIteration = i === 50;
+                
                 if( isClick == 'r' ){
                     
                     await delay(10);
+
                     setStyleLeftCard({
                         position:'relative',
                         width: isLastIteration? '0%' : (50-i)+'%',
@@ -251,16 +253,17 @@ export default function WorldCupScreen(){
                         height: isLastIteration? '0%' : (100 - i*2)+'%',  
                         display: isLastIteration? 'none' : 'block',
                     });
+                    
                     setStyleVerseText({
                         fontFamily:'HakgyoansimDoldamM',
-                        display: isLastIteration? 'none' :'block',
+                        display: 'none',
                     });
+
                     setStyleScreen({
                         backgroundColor: i % 2 == 0 ? 'white' : 'yellow',
                         minHeight:'40em',
                         height:'100vh',
                     });
-
                     // setTimeout(()=>{
                     //     setStyleLeftCard({
                     //         position:'relative',
@@ -284,6 +287,7 @@ export default function WorldCupScreen(){
                     //     });
                     //     console.log("i : "+i+", "+styleScreen);
                     // }, i * 10);   
+
                 } else if ( isClick == 'l' ){
 
                     await delay(10);
@@ -299,10 +303,12 @@ export default function WorldCupScreen(){
                         height: isLastIteration? '0%' : (100 - i*2)+'%',  
                         display: isLastIteration? 'none' : 'block',
                     });
+
                     setStyleVerseText({
                         fontFamily:'HakgyoansimDoldamM',
-                        display: isLastIteration? 'none' :'block',
+                        display: 'none',
                     });
+                    
                     setStyleScreen({
                         backgroundColor: i % 2 == 0 ? 'white' : 'yellow',
                         minHeight:'40em',
@@ -338,7 +344,19 @@ export default function WorldCupScreen(){
         }
 
         animate();
+
+        setNumStage((preNumStage) => preNumStage+1);
+
+        console.log("[WorldCupIngame.js] gameTitle : "+gameTitle);
     },[isClick]);
+
+    useEffect(()=>{
+        console.log("[WorldCupIngame.js] numStage : "+ numStage);
+
+        setRotateLeft({x: 0, y: 0});
+        setRotateRight({x: 0, y: 0});
+
+    },[numStage]);
 
     return (
         <div className='flex items-center justify-evenly min-h-4/5'

@@ -80,7 +80,8 @@ export default function Index() {
                <p className="max-w-[600px] text-zinc-200 md:text-xl dark:text-zinc-100 mx-auto">
                  사이트, 쇼핑몰, 전산, 프로그램<br/>
                  자동화 로직 , 프로그램 연계 자동화, 카카오톡 송신<br/>
-                 원하는 모든 것을 제작해드립니다. ( 디자인 제외 )
+                 채팅, 게임<br/>
+                 경험있습니다. ( 디자인 제외 )
                </p>
              </div>
              <div 
@@ -101,6 +102,7 @@ export default function Index() {
                    <h2 className="text-xl font-bold text-white">개발자 이력 소개</h2>
                    <p className="text-zinc-200 dark:text-zinc-100">
                      개발자의 작업 경험과 간단한 이력사항 보유 기술을 보여드립니다.
+                     ( 현재 준비중 )
                    </p>
                  </div>
                  <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg"
@@ -113,7 +115,7 @@ export default function Index() {
                    </p>
                  </div>
                  <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg"
-                      onClick={()=>clickMenu(2)}>
+                      onClick={()=>openKakao()}>
                    <Image src={navi_icon_4} alt='문의/제안/의뢰' style={{width: '40%', height: '40%'}}/>
                    <h2 className="text-xl font-bold text-white">문의 및 제안</h2>
                    <p className="text-zinc-200 dark:text-zinc-100">
