@@ -6,7 +6,7 @@ import chair from '@worldcup/chair.png'
 
 export default function WorldCupCard({ card, direction, isClick }){
 // const WorldCupCard = forwardRef(({ card, direction }, ref) => {
-    const { properties } = card;
+    const { properties } = card ? card : {properties:{}};
     // const optionalClassName = direction == 'l' ? 'rounded-sm overflow-hidden border-red-500' : 'rounded-sm overflow-hidden border-blue-500';
     // const optionalBorderColor = direction == 'l' ? '#4f3d40' : '#4f555f';
     
@@ -16,13 +16,13 @@ export default function WorldCupCard({ card, direction, isClick }){
     
     const [innerSizeControll,setInnerSizeControll] = useState({
         // heightPic: '50%',
-        heightPic: window.innerHeight * ( 0.8 ) * ( 0.5 ) + 'px',
+        heightPic: '',
         heightText: '50%',
     });
 
     const [marginTopPic,setMarginTopPic] = useState('3%');
 
-    const [cardSize,setCardSize] = useState({ width: window.innerWidth, height: window.innerHeight });
+    const [cardSize,setCardSize] = useState({ width: '', height: ''});
 
     // const chooseCardResize = useCallback(() => {
     //     console.log("is it real?");
@@ -150,7 +150,7 @@ export default function WorldCupCard({ card, direction, isClick }){
             animateUp();
         }
 
-    },[isClick]);
+    },[isClick, direction]);
 
     return (
         <div className="border-2 rounded-sm overflow-hidden"
@@ -159,16 +159,27 @@ export default function WorldCupCard({ card, direction, isClick }){
             {/* <div className='inline-block w-full h-full bg-contain bg-center bg-no-repeat' style={card.style}/> */}
             <div className='mt-3' style={{position:'relative',minWidth:'100%',minHeight:innerSizeControll.heightPic, marginTop: marginTopPic}}>
             {/* <div className='mt-3' style={{position:'relative',width:innerSizeControll.widthPic, height:innerSizeControll.heightPic}}> */}
-                <Image src={card.src}
+                {card && card.src && (
+                    <Image
+                        src={card.src}
                         alt="hi"
                         layout="fill"
                         objectFit="contain"
                         loading="lazy"
-                        />
+                    />
+                    )}
+                {/* <Image src={card.src ? card.src : ''}
+                        alt="hi"
+                        layout="fill"
+                        objectFit="contain"
+                        loading="lazy"
+                        /> */}
             </div>
 
             <div className='mt-5 overflow-auto' style={{height:innerSizeControll.heightText}}>
-                <a className='text-3xl' style={{fontFamily:'HakgyoansimDoldamM'}}>&nbsp;&nbsp;&nbsp;{card.name}</a>
+                { card && card.name && (
+                    <a className='text-3xl' style={{fontFamily:'HakgyoansimDoldamM'}}>&nbsp;&nbsp;&nbsp;{card.name}</a>
+                )}
                 <br/>
                 <ul>
                     {Object.entries(properties).map(([key, value], index) => (

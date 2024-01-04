@@ -348,7 +348,7 @@ export default function WorldCupIngame({onChangeGameState, gameTitle}){
         setNumStage((preNumStage) => preNumStage+1);
 
         console.log("[WorldCupIngame.js] gameTitle : "+gameTitle);
-    },[isClick]);
+    },[isClick, gameTitle]);
 
     useEffect(()=>{
         console.log("[WorldCupIngame.js] numStage : "+ numStage);

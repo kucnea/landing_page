@@ -3,10 +3,10 @@ import Link from "next/link"
 import FunNavi from "./FunNavi"
 import DashBoardMain from "./DashBoardContents/DashBoardMain"
 import GameScreen from './DashBoardContents/Game/GameScreen'
-import WorldCupPreStart from './DashBoardContents/Ideal type world cup/WorldCupPreStart'
+import WorldCupPreStart from './DashBoardContents/IdealTypeWorldCup/WorldCupPreStart'
 import ChatRoom from './DashBoardContents/ChatRoom'
 import JoinForm from './DashBoardContents/JoinForm'
-import WorldCupScreen from './DashBoardContents/Ideal type world cup/WorldCupScreen'
+import WorldCupScreen from './DashBoardContents/IdealTypeWorldCup/WorldCupScreen'
 
 export default function Component() {
 

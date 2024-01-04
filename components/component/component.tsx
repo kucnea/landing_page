@@ -16,7 +16,7 @@ export function Component() {
       <section className="grid grid-cols-2 gap-4">
         <Card className="flex flex-col items-center p-4 ring-4 ring-purple-500">
           <CardHeader>
-            <Avatar className="w-20 h-20 mb-2" src="/placeholder.svg?height=100&width=100" />
+            {/* <Avatar className="w-20 h-20 mb-2" src="/placeholder.svg?height=100&width=100" /> */}
             <Badge>Option 1</Badge>
           </CardHeader>
           <CardContent>
@@ -25,7 +25,7 @@ export function Component() {
         </Card>
         <Card className="flex flex-col items-center p-4 ring-4 ring-yellow-500">
           <CardHeader>
-            <Avatar className="w-20 h-20 mb-2" src="/placeholder.svg?height=100&width=100" />
+            {/* <Avatar className="w-20 h-20 mb-2" src="/placeholder.svg?height=100&width=100" /> */}
             <Badge>Option 2</Badge>
           </CardHeader>
           <CardContent>
