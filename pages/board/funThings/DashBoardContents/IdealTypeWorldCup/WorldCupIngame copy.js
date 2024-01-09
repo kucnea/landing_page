@@ -230,25 +230,6 @@ export default function WorldCupIngame({onChangeGameState, gameTitle}){
     // }
     
     useEffect(()=>{
-
-        const resetCss = async () => {
-            
-            const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-            
-            console.log("start reset");
-
-            await delay(500);
-            setRotateLeft( { x: 0, y: 0 } );
-            setRotateRight( { x: 0, y: 0 } );
-            setStyleLeftCard( { position: 'relative',width: '50%', height: '50%', display: 'block' } );
-            setStyleRightCard( { position: 'relative',width: '50%', height: '50%', display: 'block' } );
-            setStyleLeftOverlay( { position: 'absolute',width: '50%', height: '50%', display: 'block' } );
-            setStyleRightOverlay( { position: 'absolute',width: '50%', height: '50%', display: 'block' } )
-            setStyleVerseText( { fontFamily:'HakgyoansimDoldamM', display: 'block', } );
-
-            console.log("complete reset");
-        }
-
         const animate = async () => {
 
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -361,8 +342,7 @@ export default function WorldCupIngame({onChangeGameState, gameTitle}){
                
             }
 
-            await delay(500);
-            // resetCss();
+            //
 
         }
 
@@ -373,31 +353,31 @@ export default function WorldCupIngame({onChangeGameState, gameTitle}){
         console.log("[WorldCupIngame.js] gameTitle : "+gameTitle);
     },[isClick, gameTitle]);
 
-    // useEffect(()=>{
+    useEffect(()=>{
 
-    //     const resetCss = async () => {
+        const resetCss = async () => {
             
-    //         const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+            const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             
-    //         console.log("start reset");
+            console.log("start reset");
 
-    //         await delay(500);
-    //         setRotateLeft( { x: 0, y: 0 } );
-    //         setRotateRight( { x: 0, y: 0 } );
-    //         setStyleLeftCard( { position: 'relative',width: '50%', height: '50%', display: 'block' } );
-    //         setStyleRightCard( { position: 'relative',width: '50%', height: '50%', display: 'block' } );
-    //         setStyleLeftOverlay( { position: 'absolute',width: '50%', height: '50%', display: 'block' } );
-    //         setStyleRightOverlay( { position: 'absolute',width: '50%', height: '50%', display: 'block' } )
-    //         setStyleVerseText( { fontFamily:'HakgyoansimDoldamM', display: 'block', } );
+            await delay(500);
+            setRotateLeft( { x: 0, y: 0 } );
+            setRotateRight( { x: 0, y: 0 } );
+            setStyleLeftCard( { position: 'relative',width: '50%', height: '50%', display: 'block' } );
+            setStyleRightCard( { position: 'relative',width: '50%', height: '50%', display: 'block' } );
+            setStyleLeftOverlay( { position: 'absolute',width: '50%', height: '50%', display: 'block' } );
+            setStyleRightOverlay( { position: 'absolute',width: '50%', height: '50%', display: 'block' } )
+            setStyleVerseText( { fontFamily:'HakgyoansimDoldamM', display: 'block', } );
 
-    //         console.log("complete reset");
-    //     }
+            console.log("complete reset");
+        }
 
-    //     console.log("[WorldCupIngame.js] numStage : "+ numStage);
+        console.log("[WorldCupIngame.js] numStage : "+ numStage);
 
-    //     resetCss();
+        resetCss();
 
-    // },[numStage]);
+    },[numStage]);
 
     return (
         <div className='flex items-center justify-evenly min-h-4/5'
@@ -424,8 +404,8 @@ export default function WorldCupIngame({onChangeGameState, gameTitle}){
                 <Card card={leftCardStyle} direction='l' isClick={isClick} />
                 <div className='cardOverlay'  ref={cardOverlayRef_left} style={{styleLeftOverlay}}/>
             </div>
-            <div  style={styleVerseText}>
-                <a className='w-30 text-red-500 text-2xl font-extrabold'>
+            <div>
+                <a className='w-30 text-red-500 text-2xl font-extrabold' style={styleVerseText}>
                     VS
                 </a></div>
 

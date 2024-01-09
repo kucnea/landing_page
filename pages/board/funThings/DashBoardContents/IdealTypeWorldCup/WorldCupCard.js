@@ -87,6 +87,14 @@ export default function WorldCupCard({ card, direction, isClick }){
 
     useEffect(()=>{
 
+        const resetCard = async () => {
+            setCardSize({
+                width: window.innerWidth * (0.3)+'px',
+                height: window.innerHeight * (0.8)+'px',  
+                display: 'block',
+            });
+        }
+
         const animateDown = async () => {
 
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -105,6 +113,9 @@ export default function WorldCupCard({ card, direction, isClick }){
                 });
                 // }, i * 10);   
             }
+
+            await delay(500);
+            resetCard();
 
         }
 
@@ -139,6 +150,9 @@ export default function WorldCupCard({ card, direction, isClick }){
                 });
 
             }
+
+            await delay(500);
+            resetCard();
 
         }
         
