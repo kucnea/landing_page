@@ -16,10 +16,11 @@ export default function Component() {
     const [isMobile,setIsMobile] = useState(false);
     const [isFunNaviOpen, setIsFunNaviOpen] = useState(true);
     const [isDragOrClickFunNavi,setIsDragOrClickFunNavi] = useState(false);
-
+    
     const [isClickFunNavi,setIsClickFunNavi] = useState(false);
     const [isOnFunNavi,setIsOnFunNavi] = useState(false);
     const [locFunNavi,setLocFunNavi] = useState({x : 0, y: 0});
+    const [locBase,setLocBase] = useState({x: 0, y : 0});
 
     const components =[
         { comp : <DashBoardMain/> },
@@ -37,6 +38,9 @@ export default function Component() {
     
 
     const handleChangeComponentIdx = (i) => {
+      if( isMobile )
+        setIsFunNaviOpen(false);
+      
       setComponentIdx(i);
     }
 
@@ -47,10 +51,6 @@ export default function Component() {
         else 
           return null;
     }
-
-    // const handleFunNaviMove = (e) => {
-    //   setIsDragOrClickFunNavi(true);
-    // }
 
     const handleFunNaviMouseUp = () => {
       console.log("[DashBoard.js] mouse up : "+isDragOrClickFunNavi);
@@ -95,8 +95,8 @@ export default function Component() {
           setIsDragOrClickFunNavi(true);
 
           setLocFunNavi({
-            x: (e.clientX - 3) + 'px',
-            y: (e.clientY - 3) + 'px',
+            x: (e.clientX ) + 'px',
+            y: (e.clientY ) + 'px',
           });
           
         }
@@ -110,8 +110,8 @@ export default function Component() {
           const my = touch.clientY;
 
           setLocFunNavi({
-            x: (mx - 1) + 'px',
-            y: (my - 1) + 'px',
+            x: (mx ) + 'px',
+            y: (my ) + 'px',
           });
           
         }
