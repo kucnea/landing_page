@@ -4,7 +4,13 @@ import { useEffect, useState } from "react"
 
 export default function FunNavi({ onChangeCompIdx, handleFunNavi, isMobile, isFunNaviOpen }){
 
-    const [styleFunNavi,setStyleFunNavi] = useState({width:'30%'});
+    const [styleFunNavi,setStyleFunNavi] = useState({width: isMobile? '50%' : '30%'});
+
+    useEffect(()=>{
+
+        setStyleFunNavi({width: isMobile? '50%' : '30%'});
+
+    },[isMobile])
 
     useEffect(()=>{
 
@@ -12,25 +18,44 @@ export default function FunNavi({ onChangeCompIdx, handleFunNavi, isMobile, isFu
 
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-            for( var i = 1 ; i <= 30 ; i++ ){
-                await delay(3);
-                setStyleFunNavi({width: 30-i+'%'});
+            if( !isMobile ){
+                for( var i = 30 ; i >= 0 ; i-- ){
+                    await delay(3);
+                    setStyleFunNavi((prevStyle) => ({
+                        ...prevStyle,width: i+'%'}));
+                        // console.log("[FunNavi.js] closeAnimation : "+styleFunNavi.width);
+                }
+            } else {
+                for( var i = 50 ; i >= 0 ; i-- ){
+                    await delay(1.8);
+                    setStyleFunNavi((prevStyle) => ({
+                        ...prevStyle,width: i+'%'}));
+                }
             }
 
             setStyleFunNavi({width: '0%', visibility:'hidden', padding:'0%'});
 
         }
 
+
         const animateFunNaviOpen = async () => {
 
             const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-            for( var i = 1 ; i <= 30 ; i++ ){
-                await delay(3);
-                setStyleFunNavi({width: i+'%'});
+            if( !isMobile ){
+                for( var i = 1 ; i <= 30 ; i++ ){
+                    await delay(3);
+                    setStyleFunNavi({width: i+'%'});
+                }
+            } else {
+                for( var i = 1 ; i <= 50 ; i++ ){
+                    await delay(1.8);
+                    setStyleFunNavi({width: i+'%'});
+                }
             }
+            
 
-            setStyleFunNavi({width: '30%', visibility:'visible', padding: '1.5rem'});
+            setStyleFunNavi({width: (isMobile? '50%' : '30%'), visibility:'visible', padding: '1.5rem'});
         }
 
         if( isFunNaviOpen ){
@@ -43,7 +68,9 @@ export default function FunNavi({ onChangeCompIdx, handleFunNavi, isMobile, isFu
 
     return(
         // w-64
-        <aside className={`bg-gray-800 text-white p-6 `}
+        <aside className={`bg-gray-800 text-white p-6 z-20
+                            ${ isMobile ? 'fixed top-0 h-full' : ''}
+                         `}
             // ${ isMobile ? 
             //     ( isFunNaviOpen ? ' fixed top-0 transform translate-x-0' : ' fixed top-0 transform -translate-x-full') 
             //     : isFunNaviOpen ? 'transform translate-x-0' : 'transform -translate-x-full'

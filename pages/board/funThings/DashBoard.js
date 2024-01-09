@@ -157,6 +157,17 @@ export default function Component() {
           onTouchEnd={()=>setIsClickFunNavi(true)}
         />
       }
+      { isFunNaviOpen? isMobile? 
+        <div 
+            className={`fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-10 
+                        ${ isMobile ? isFunNaviOpen? 'block' : 'hidden' : 'hidden' }
+                      `}
+        />
+        :
+        ''
+        :
+        ''
+      }
       {/* <FunNavi 
         onChangeCompIdx={handleChangeComponentIdx} 
         handleFunNavi={handleFunNavi} 
