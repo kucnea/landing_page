@@ -4,11 +4,11 @@ import { useEffect, useState } from "react"
 
 export default function FunNavi({ onChangeCompIdx, handleFunNavi, isMobile, isFunNaviOpen }){
 
-    const [styleFunNavi,setStyleFunNavi] = useState({width: isMobile? '50%' : '30%'});
+    const [styleFunNavi,setStyleFunNavi] = useState({width: isMobile? '50%' : '20%'});
 
     useEffect(()=>{
 
-        setStyleFunNavi({width: isMobile? '50%' : '30%'});
+        setStyleFunNavi({width: isMobile? '50%' : '20%'});
 
     },[isMobile])
 
@@ -55,7 +55,7 @@ export default function FunNavi({ onChangeCompIdx, handleFunNavi, isMobile, isFu
             }
             
 
-            setStyleFunNavi({width: (isMobile? '50%' : '30%'), visibility:'visible', padding: '1.5rem'});
+            setStyleFunNavi({width: (isMobile? '50%' : '20%'), visibility:'visible', padding: '1.5rem'});
         }
 
         if( isFunNaviOpen ){

@@ -16,9 +16,9 @@ export default function Component() {
     const [isMobile,setIsMobile] = useState(false);
     const [isFunNaviOpen, setIsFunNaviOpen] = useState(true);
     const [isDragOrClickFunNavi,setIsDragOrClickFunNavi] = useState(false);
-    
+    // const [isOnFunNaviBtn,setIsFunNaviBtn] = useState(false);
+
     const [isClickFunNavi,setIsClickFunNavi] = useState(false);
-    const [isOnFunNavi,setIsOnFunNavi] = useState(false);
     const [locFunNavi,setLocFunNavi] = useState({x : 0, y: 0});
     const [locBase,setLocBase] = useState({x: 0, y : 0});
 
@@ -40,12 +40,11 @@ export default function Component() {
     const handleChangeComponentIdx = (i) => {
       if( isMobile )
         setIsFunNaviOpen(false);
-      
+
       setComponentIdx(i);
     }
 
     function ShowComponent(){
-        console.log(componentIdx);
         if( componentIdx >= 0 && componentIdx <= components.length )
           return components[componentIdx].comp;
         else 
@@ -63,7 +62,20 @@ export default function Component() {
 
     useEffect(()=>{
       const handleResize = () => {
+        // console.log("[DashBoard.js] run resize handler");
+        // console.log(window.innerWidth <= mobileWidth);
+        // console.log("locX : "+locFunNavi.x);
+        // console.log("type : "+typeof locFunNavi.x+", value : "+ locFunNavi.x);
+        // console.log("true/false : "+typeof locFunNavi.x === 'string' );
         setIsMobile(window.innerWidth <= mobileWidth);
+        if( window.innerWidth <= mobileWidth && typeof locFunNavi.x === 'string' && locFunNavi.x.substring(0,(locFunNavi.x.length)-2) >= mobileWidth) {
+          // console.log("[DashBoard.js] in if phrase");
+          setLocFunNavi({x : '1px', y : '1px'});
+        } else if( window.innerWidth <= mobileWidth && typeof locFunNavi.x === 'number' && locFunNavi.x >= mobileWidth ) {
+          // console.log("[DashBoard.js] in if phrase");
+          setLocFunNavi({x : '1px', y : '1px'});
+        }
+        
       };
   
       handleResize();
@@ -75,11 +87,19 @@ export default function Component() {
       return () => {
         window.removeEventListener('resize', handleResize);
       };
-    },[]);
+    },[locFunNavi]);
 
     useEffect(()=>{
       setLocFunNavi({x : '1%', y : '0%'});
     },[]);
+
+    // useEffect(()=>{
+
+    //   if( isMobile && locFunNavi.x >= mobileWidth) {
+    //     setLocFunNavi({x : '1%', y : '0%'});
+    //   }
+
+    // },[isMobile]);
 
     useEffect(()=>{
 
@@ -145,16 +165,16 @@ export default function Component() {
         :
         <ProfileOutlined
           className='fixed text-2xl'
-          style={{width:'24px', height:'24px', left: locFunNavi.x, top: locFunNavi.y}}
+          style={{width:'24px', height:'24px', cursor: 'pointer', left: locFunNavi.x, top: locFunNavi.y}}
           // onClick={()=>handleFunNaviMouseUp('click')}
           onMouseDown={()=>setIsClickFunNavi(true)}
           // onMouseUp={()=>setIsClickFunNavi(false)}
           onMouseUp={handleFunNaviMouseUp}
           // onMouseMove={handleFunNaviMove}
-          onMouseOver={()=>setIsOnFunNavi(true)}
-          onMouseOut={()=>setIsOnFunNavi(false)}
+          // onMouseOver={()=>setIsFunNaviBtn(true)}
+          // onMouseOut={()=>setIsFunNaviBtn(false)}
           onTouchStart={()=>setIsClickFunNavi(true)}
-          onTouchEnd={()=>setIsClickFunNavi(true)}
+          onTouchEnd={handleFunNaviMouseUp}
         />
       }
       { isFunNaviOpen? isMobile? 
@@ -168,12 +188,6 @@ export default function Component() {
         :
         ''
       }
-      {/* <FunNavi 
-        onChangeCompIdx={handleChangeComponentIdx} 
-        handleFunNavi={handleFunNavi} 
-        isMobile={isMobile} 
-        isFunNaviOpen={isFunNaviOpen}
-      /> */}
       
       <main className={`flex-1 bg-gray-100 p-6 overflow-hidden overflow-y-auto
                         ${ isFunNaviOpen ? 'ml-0' : 'ml-30' }
