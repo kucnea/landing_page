@@ -224,13 +224,15 @@ export default function Index() {
                   </a>
                 </div>
                 <div className='text-gray-100 mb-2'
-                      style={{background: styleMenus[1].backGround}}>
+                      style={{background: styleMenus[1].backGround}}
+                      onClick={()=>clickMenu(1)}>
                   <a>
                     즐길거리
                   </a>
                 </div>
                 <div className='text-gray-100 mb-2'
-                      style={{background: styleMenus[2].backGround}}>
+                      style={{background: styleMenus[2].backGround}}
+                      onClick={()=>openKakao()}>
                   <a>
                     문의 및 제안
                   </a>
