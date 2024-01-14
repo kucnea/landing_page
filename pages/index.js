@@ -20,6 +20,7 @@ export default function Index() {
   const mobileWidth = 768;
   const [currentImage, setCurrentImage] = useState(0);
   const [currentComponent, setCurrentComponent] = useState(0);
+  const [isCeoStart,setIsCeoStart] = useState(false);
 
   const images = [
      { src: front_img1, alt: "frontImg_1" },
@@ -27,15 +28,17 @@ export default function Index() {
      { src: front_img3, alt: "frontImg_3" },
   ];
   const components = [
-    { comp : <Ceo/> },
+    { comp : <Ceo isStart={isCeoStart}/> },
     { comp : <Ceo/> },
     { comp : <InputForm/> },
   ]
 
   function clickMenu(i){
-    if( i == 1){
+    if( i == 0 )
+      setIsCeoStart(true);
+    else if( i == 1)
       window.location.href = '/board/funThings/DashBoard'
-    }
+    
     setCurrentComponent(i);
   }
 
@@ -139,7 +142,7 @@ export default function Index() {
     return () => clearInterval(interval);
   
 
-  },);
+  },[]);
 
   useEffect(()=>{
     const handleResize = () => {
@@ -177,10 +180,11 @@ export default function Index() {
                 style={{ position: 'relative', width: '100%', height: '50vh', border: '1px solid #ffffff' }}
                 onClick={()=>moveIndexImg()}>
                   <Image 
-                  src={images[currentImage].src}
-                  alt={images[currentImage].alt}
-                  layout="fill"
-                  objectFit="contain"
+                    src={images[currentImage].src}
+                    alt={images[currentImage].alt}
+                    // layout="fill"
+                    // objectFit="contain"
+                    style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                   />
              </div>
              { !isMobile ? 
@@ -200,7 +204,6 @@ export default function Index() {
                     <h2 className="text-xl font-bold text-white">즐길거리</h2>
                     <p className="text-zinc-200 dark:text-zinc-100">
                       간단한 즐길거리, 정보 공유를 하는 곳입니다.<br/>
-                      ( 현재 준비중 )
                     </p>
                   </div>
                   <div className="flex flex-col items-center space-y-2 border-gray-800 p-4 rounded-lg"
@@ -270,9 +273,16 @@ export default function Index() {
                </div>
              </div> */}
 
-             <div style={{display:'flex',justifyContent:'center'}}>
+             { isCeoStart ? 
+              <div style={{display:'flex',justifyContent:'center'}}>
+                  <Ceo isStart={isCeoStart}/>
+              </div>
+             :
+              <div/>
+             }
+             {/* <div style={{display:'flex',justifyContent:'center'}}>
               <SelectComponent/>
-             </div>
+             </div> */}
 
 
 

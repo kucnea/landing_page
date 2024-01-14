@@ -80,3 +80,18 @@
 .mh-indexTitle-red-5 {
   background: linear-gradient(45deg, red, red, red, red, red, black);
 }
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.blinkingCursor {
+  display: inline-block;
+  border-right: 2px solid #000; /* 언더바 스타일 설정 */
+  animation: blink 1s infinite; /* 1초 주기로 blink 애니메이션 실행 */
+}

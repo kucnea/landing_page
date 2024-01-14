@@ -45,7 +45,7 @@ export default function Ceo({isStart}) {
             <div className="w-3 h-3 rounded-full bg-red-500" />
             <div className="w-3 h-3 rounded-full bg-yellow-500" />
             <div className="w-3 h-3 rounded-full bg-green-500" />
-            </div>
+        </div>
             <p className="text-sm">bash</p>
         </div>
         <div className="mt-4 text-left">
