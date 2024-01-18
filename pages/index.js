@@ -12,6 +12,9 @@ import navi_icon_3 from '/public/image/item_03.png'
 import navi_icon_4 from '/public/image/item_01.png'
 import kakao from '/public/image/kakao.png'
 import MHVideoPlayer from './layouts/MHVideoPlayer'
+import { YoutubeOutlined } from '@ant-design/icons';
+import YoutubeIcon from '@icon/youtube.png';
+import Ticktok from '@icon/ticktok.png';
 
 
 
@@ -192,10 +195,30 @@ function openJiHyeYoutube(){
                   />
              </div>
 
-             <MHVideoPlayer filePathVideo='/video/minho-minhoSiteVideo.mp4'/>
-             <a className='text-white' onClick={openJiHyeYoutube}>
-              * 해당 영상은 이지혜 님께서 제작해 주셨습니다.
+             <MHVideoPlayer filePathVideo='/video/minho-minhoSiteVideo.mp4' boolAutoPlay = {true} boolMute = {true} />
+             <a className='text-white flex items-center justify-center'>
+              * 해당 영상은 이지혜 님께서 제작해 주셨습니다. &nbsp;&nbsp;
+              {/* <YoutubeOutlined  onClick={openJiHyeYoutube} /> */}
+              <Image 
+                    src={YoutubeIcon}
+                    alt='Youtube Icon'
+                    // layout="fill"
+                    // objectFit="contain"
+                    onClick={openJiHyeYoutube}
+                    style={{ objectFit: 'cover', width: '5%', height: '5%' }}
+                    
+              />
+              <Image 
+                    src={Ticktok}
+                    alt='ticktok Icon'
+                    // layout="fill"
+                    // objectFit="contain"
+                    onClick={openJiHyeYoutube}
+                    style={{ objectFit: 'cover', width: '5%', height: '5%' }}
+                    
+              />
             </a>
+            
 
              { !isMobile ? 
               <div className="w-full max-w-full space-y-4 mx-auto">

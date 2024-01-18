@@ -26,6 +26,7 @@
       "@public/*":["public/*"],
       "@components/*":["components/*"],
       "@worldcup/*":["public/games/worldCup/*"],
+      "@icon/*":["public/image/icon/*"],
       "@video/*":["public/video/*"]
     }
   },

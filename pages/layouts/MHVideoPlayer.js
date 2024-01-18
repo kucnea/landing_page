@@ -1,27 +1,35 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ReactPlayer from 'react-player';
 
-export default function CustomVideo({filePathVideo}){
+export default function CustomVideo({filePathVideo, boolAutoPlay, boolMute}){
 
     const refVideo = useRef(null);
 
+    const [stateAutoPlay,setStateAutoPlay] = useState(boolAutoPlay);
+    const [stateMute,setStateMute] = useState(boolMute);
+
     useEffect(()=>{
-        // console.log("[MHVideoPlayer.js] run Page.");
-        // if( refVideo.current ){
-        //     console.log("[MHVideoPlayer.js] run play1");
-        //     // refVideo.current.play();
+
+        // if( boolAutoPlay ){
+            
+        //     setStateAutoPlay(boolAutoPlay);
             
         //     refVideo.current.play().catch(error => {
-        //         console.error('[MHVideoPlayer.js] run fail', error);
+        //         setStateAutoPlay(false);
         //     });
-        //     console.log("[MHVideoPlayer.js] run play2");
+
+        // } else {
+
         // }
+
     },[]);
 
     return (
         <div className='mx-auto'>
             <div className="video-player">
-                <video autoPlay controls muted
+                <video controls
+                    autoPlay = {stateAutoPlay}
+                    muted = {stateMute}
                     ref = {refVideo}
                     width="750"
                     height="500"
