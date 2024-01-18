@@ -10,17 +10,21 @@ export default function CustomVideo({filePathVideo, boolAutoPlay, boolMute}){
 
     useEffect(()=>{
 
-        // if( boolAutoPlay ){
+        if( boolAutoPlay ){
             
-        //     setStateAutoPlay(boolAutoPlay);
-            
-        //     refVideo.current.play().catch(error => {
-        //         setStateAutoPlay(false);
-        //     });
+            refVideo.current.play().catch(error => {
+                setStateMute(true);
+            });
 
-        // } else {
+            ((isRun) => {
 
-        // }
+                if( isRun ){
+                    refVideo.current.play();
+                }
+        
+            })(stateMute);
+
+        }
 
     },[]);
 
