@@ -11,6 +11,7 @@ import navi_icon_2 from '/public/image/item_02.png'
 import navi_icon_3 from '/public/image/item_03.png'
 import navi_icon_4 from '/public/image/item_01.png'
 import kakao from '/public/image/kakao.png'
+import MHVideoPlayer from './layouts/MHVideoPlayer'
 
 
 
@@ -129,9 +130,12 @@ export default function Index() {
  };
 
  function openKakao(){
-  // window.location.href=process.env.NEXT_PUBLIC_REACT_APP_OPEN_KAKAO;
   window.open(process.env.NEXT_PUBLIC_REACT_APP_OPEN_KAKAO, '_blank', 'noopener,noreferrer');
  };
+
+function openJiHyeYoutube(){
+  window.open('https://www.youtube.com/@jihye_88', '_blank', 'noopener,noreferrer');
+}
 
   useEffect(()=>{
 
@@ -187,6 +191,12 @@ export default function Index() {
                     style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                   />
              </div>
+
+             <MHVideoPlayer filePathVideo='/video/minho-minhoSiteVideo.mp4'/>
+             <a className='text-white' onClick={openJiHyeYoutube}>
+              * 해당 영상은 이지혜 님께서 제작해 주셨습니다.
+            </a>
+
              { !isMobile ? 
               <div className="w-full max-w-full space-y-4 mx-auto">
                 <div className="grid grid-cols-3 gap-8">

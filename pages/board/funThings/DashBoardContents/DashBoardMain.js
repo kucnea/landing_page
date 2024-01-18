@@ -1,3 +1,5 @@
+// import MHVideoPlayer from '../../../layouts/MHVideoPlayer'
+
 export default function DashBoardMain(){
     return (
         <div>
@@ -13,6 +15,7 @@ export default function DashBoardMain(){
                 <p className="mt-2 text-gray-600">
                 Your revenue has increased since your last visit, keep up the good work!
                 </p>
+                {/* <MHVideoPlayer/> */}
             </div>
             </div>
         </div>

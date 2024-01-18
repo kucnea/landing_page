@@ -1,0 +1,8 @@
+// {
+//     "presets": ["@babel/preset-env"
+//                 ,["@babel/preset-react", {
+//                                             "runtime": "automatic" // React 17+의 새로운 JSX 변환 사용
+//                                         }]
+//                 ,"@babel/preset-typescript"],
+//     "plugins": ["@babel/plugin-proposal-class-properties"]
+// }

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import HakgyoansimDoldamM from '@public/styles/minho.css'
 import chair from '@worldcup/chair.png'
 
-
+ 
 export default function WorldCupCard({ card, direction, isClick }){
 // const WorldCupCard = forwardRef(({ card, direction }, ref) => {
     const { properties } = card ? card : {properties:{}};
