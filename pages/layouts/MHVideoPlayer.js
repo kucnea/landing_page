@@ -2,12 +2,13 @@ import React, { useRef, useEffect, useState } from 'react';
 import Image from 'next/image'
 import ImgLogo from '/public/image/LogoMinho_noBack_wide.png'
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
-
+import OvlBottom from './VideoPlayer/OvlBottom';
 
 export default function CustomVideo({filePathVideo, boolAutoPlay, boolMute, boolAutoReplay, boolBusiness, vWidth, vHeight}){
 
     const refVideo = useRef(null);
 
+    const [isMobile,setIsMobile] = useState(false);
     const [stateAutoPlay,setStateAutoPlay] = useState(boolAutoPlay);
     const [stateMute,setStateMute] = useState(boolMute);
 
@@ -21,16 +22,7 @@ export default function CustomVideo({filePathVideo, boolAutoPlay, boolMute, bool
     const [advInStart, setAdvInStart] = useState(null);
     const [advInMiddle, setAdvInMiddle] = useState(null);
 
-    function moveToMain(){
-        window.location.href = '/'
-    }
-
-    const clickPlay = () => {
-      if( !isPlaying ) {
-        refVideo.current.play();
-        setIsPlaying(true);
-      }
-    }
+    const mobileWidth = process.env.NEXT_PUBLIC_REACT_APP_MOBILE_SIZE;
     // useEffect(()=>{
 
     //     if( boolAutoPlay ){
@@ -50,6 +42,19 @@ export default function CustomVideo({filePathVideo, boolAutoPlay, boolMute, bool
     //     }
 
     // },[]);
+
+    useEffect(()=>{
+        const handleResize = () => {
+          setIsMobile(window.innerWidth <= mobileWidth);
+        };
+    
+        handleResize();
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+    },[]);
 
     useEffect(() => {
 
@@ -111,25 +116,7 @@ export default function CustomVideo({filePathVideo, boolAutoPlay, boolMute, bool
                     Your browser does not support the video tag.
                     <source src={filePathVideo} type="video/mp4" />
                 </video>
-                <div className='video-bottom-ovl flex'>
-                  <Image
-                      className='video-logo' 
-                      src={ImgLogo}
-                      alt='LOGO'
-                      onClick={moveToMain}
-                      style={{ objectFit: 'cover', width: '10%', height: '60%' }}
-                  />  
-                  { isPlaying? 
-                    <PauseOutlined />
-                    :
-                    <CaretRightOutlined 
-                      className='btnPlay text-2xl' 
-                      style={{position: 'absolute'}}
-                      onClick={clickPlay}
-                    />
-                  }
-                  
-                </div>
+                <OvlBottom isMobile={isMobile} refVideo={refVideo} isPlaying={isPlaying} setIsPlaying={setIsPlaying} progressRate={progressRate}/>
             </div>
         </div>
     );

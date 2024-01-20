@@ -140,6 +140,10 @@ function openJiHyeYoutube(){
   window.open('https://www.youtube.com/@jihye_88', '_blank', 'noopener,noreferrer');
 }
 
+function openJiHyeTickTok(){
+  window.open('https://www.tiktok.com/@wlgp_8_', '_blank', 'noopener,noreferrer');
+}
+
   useEffect(()=>{
 
     const interval = setInterval(() => {
@@ -214,7 +218,7 @@ function openJiHyeYoutube(){
                     alt='ticktok Icon'
                     // layout="fill"
                     // objectFit="contain"
-                    onClick={openJiHyeYoutube}
+                    onClick={openJiHyeTickTok}
                     style={{ objectFit: 'cover', width: '3%', height: '3%' }}
                     
               />

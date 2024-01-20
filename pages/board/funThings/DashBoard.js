@@ -12,7 +12,7 @@ import { MenuOutlined, ProfileOutlined } from '@ant-design/icons'
 export default function Component() {
 
     const [componentIdx,setComponentIdx] = useState(0);
-    const mobileWidth = 768;
+    const mobileWidth = process.env.NEXT_PUBLIC_REACT_APP_MOBILE_SIZE;
     const [isMobile,setIsMobile] = useState(false);
     const [isFunNaviOpen, setIsFunNaviOpen] = useState(true);
     const [isDragOrClickFunNavi,setIsDragOrClickFunNavi] = useState(false);
@@ -112,6 +112,7 @@ export default function Component() {
 
       const moveWebFunNavi = (e) => {
         if ( isClickFunNavi ) {
+          e.preventDefault();
           setIsDragOrClickFunNavi(true);
 
           setLocFunNavi({
@@ -123,6 +124,7 @@ export default function Component() {
       };
       const moveMoFunNavi = (e) => {
         if ( isClickFunNavi ) {
+          
           setIsDragOrClickFunNavi(true);
 
           const touch = e.touches[0];
@@ -137,17 +139,27 @@ export default function Component() {
         }
       };
 
+      const handleMouseUp = (e) => {
+        setIsClickFunNavi(false);
+      }
+
       if( !isMobile ){
         document.addEventListener('mousemove', moveWebFunNavi);
+        document.addEventListener('mouseup', handleMouseUp);
         document.removeEventListener('touchmove', moveMoFunNavi);
+        document.removeEventListener('touchend',handleMouseUp);
       } else {
         document.addEventListener('touchmove', moveMoFunNavi);
+        document.addEventListener('touchend',handleMouseUp);
         document.removeEventListener('mousemove', moveWebFunNavi);
+        document.removeEventListener('mouseup', handleMouseUp);
       }
 
       return () => {
         document.removeEventListener('mousemove', moveWebFunNavi);
         document.removeEventListener('touchmove', moveMoFunNavi);
+        document.removeEventListener('mouseup', handleMouseUp);
+        document.removeEventListener('touchend',handleMouseUp);
       };
 
     },[isClickFunNavi,isMobile]);
