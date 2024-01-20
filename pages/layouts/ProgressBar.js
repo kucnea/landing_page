@@ -2,13 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 
 export default function ProgressBar({isMobile, maxValue, curValue, handleValue, widthBar, heightBar, thumbColorBar, beforeColorBar, afterColorBar, positionBar, leftBar, topBar}){
     
-    const [numWidth,setNumWidth] = useState(widthBar.substring(0,widthBar.length - 1));
+    const [numWidth,setNumWidth] = useState(widthBar? widthBar.substring(0,widthBar.length - 1) : 0);
     const [isClickThumb,setIsClickThumb] = useState(false);
     const [locVolume,setLocVolume] = useState(curValue/maxValue);
 
     const refBar = useRef(null);
     useEffect(()=>{
-        setNumWidth(widthBar.substring(0,widthBar.length - 1));
+        if( widthBar )
+            setNumWidth(widthBar.substring(0,widthBar.length - 1));
     },[widthBar]);
 
     useEffect(()=>{
