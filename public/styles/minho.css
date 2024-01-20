@@ -132,11 +132,11 @@
 }
 
 .progressBar-minho::-webkit-slider-thumb {
-  /* -webkit-appearance: none; */
-  /* background-color: #ff0000; */
+  -webkit-appearance: none;
+  background-color: #ff0000;
   /* cursor: pointer; */
   /* border: 1px solid #000000;  */
-  /* height: 36px; width: 16px;    */
+  height: 36px; width: 16px;   
   /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
   /* border-radius: 3px; */
 }

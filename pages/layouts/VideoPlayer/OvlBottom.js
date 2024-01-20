@@ -8,6 +8,7 @@ import { NotificationOutlined } from '@ant-design/icons';
 export default function CustomVideo({isMobile, refVideo, isPlaying, setIsPlaying, progressRate}){
 
     const [volume, setVolume] = useState(1);
+    const [beforeVolume,setBeforeVolume] = useState(1);
     const [sizePlayBtn,setSizePlayBtn] = useState(isMobile? '80%' : '180%');
     const [sizeVolumeBtn,setSizeVolumeBtn] = useState(isMobile? '30%' : '130%');
     const refHiddenVolume = useRef(null);
@@ -16,7 +17,6 @@ export default function CustomVideo({isMobile, refVideo, isPlaying, setIsPlaying
     const handleVolumeChange = (e) => {
         // const newVolume = e.target.value;
         setVolume(e);
-        setHiddenVolume(1-e);
         if(refVideo.current) {
             refVideo.current.volume = e;
         }
@@ -40,13 +40,22 @@ export default function CustomVideo({isMobile, refVideo, isPlaying, setIsPlaying
         }        
     }
 
+    const clickSpeaker = () => {
+        if( volume > 0 ){
+            setBeforeVolume(volume);
+            setVolume(0);
+        } else {
+            setVolume(beforeVolume);
+        }
+    }
+
     useEffect(() => {
         if(refVideo.current) {
             refVideo.current.volume = volume;
         }
         if(refHiddenVolume.current){
             var length = refHiddenVolume.current.getBoundingClientRect().right - refHiddenVolume.current.getBoundingClientRect().left;
-            
+            setHiddenVolume(length*volume);
         }
       }, [volume]);
 
@@ -84,16 +93,19 @@ export default function CustomVideo({isMobile, refVideo, isPlaying, setIsPlaying
                                           fontSize: sizeVolumeBtn,
                                           color:'white',
                                           overflow: 'hidden',
-                                          }}/>
+                                          }}
+                                  ref={refHiddenVolume}
+                                  onClick={clickSpeaker}
+            />
             <NotificationOutlined style={{position:'absolute',
                                           left:'16%',
                                           top:'calc(23%)',
                                           fontSize: sizeVolumeBtn,
                                           color:'#d09da6',
                                           overflow: 'hidden',
-                                          width:'10px'
+                                          width:hiddenVolume+'px'
                                           }}
-                                  ref={refHiddenVolume}          
+                                  onClick={clickSpeaker}
                                           />
             <ProgressBar 
                 isMobile={isMobile}

@@ -12,6 +12,10 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
             setNumWidth(widthBar.substring(0,widthBar.length - 1));
     },[widthBar]);
 
+    const clickBar =  (e) => {
+        setIsClickThumb(true);
+    }
+
     useEffect(()=>{
         // console.log("[ProgessBar.js] width : "+(curValue/maxValue)*numWidth);
         // console.log("[ProgessBar.js] width1 : "+curValue);
@@ -52,14 +56,18 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
         }
 
         document.addEventListener('mousemove', moveThumb);
+        document.addEventListener('mousedown', moveThumb);
         document.addEventListener('mouseup', handleMouseUp);
         document.addEventListener('touchmove', moveThumb);
+        document.addEventListener('touchstart', moveThumb);
         document.addEventListener('touchend', handleMouseUp);
   
         return () => {
           document.removeEventListener('mousemove', moveThumb);
+          document.removeEventListener('mousedown', moveThumb);
           document.removeEventListener('mouseup', handleMouseUp);
           document.removeEventListener('touchmove', moveThumb);
+          document.removeEventListener('touchstart', moveThumb);
           document.removeEventListener('touchend',handleMouseUp);
         };
   
@@ -75,8 +83,12 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
                         left: leftBar,
                         top: topBar,
                         height: heightBar,
-                        zIndex:-1,
                         backgroundColor: beforeColorBar}}
+                onClick={()=>setIsClickThumb(true)}
+                onMouseDown={()=>setIsClickThumb(true)}
+                onMouseUp={()=>setIsClickThumb(false)}
+                onTouchStart={()=>setIsClickThumb(true)}
+                onTouchEnd={()=>setIsClickThumb(false)}
             />
             <div
                 className='progressRailFill-minho progressBar'
@@ -86,6 +98,11 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
                         left: leftBar,
                         height: heightBar,
                         top: topBar,}}
+                onClick={()=>setIsClickThumb(true)}
+                onMouseDown={()=>setIsClickThumb(true)}
+                onMouseUp={()=>setIsClickThumb(false)}
+                onTouchStart={()=>setIsClickThumb(true)}
+                onTouchEnd={()=>setIsClickThumb(false)}
             />
             <div
                 className='progressBarThumb'
@@ -102,26 +119,7 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
                 onTouchEnd={()=>setIsClickThumb(false)}
                 
             />
-            <div
-                className='progressRail-minho progressBar'
-                style={{position: positionBar,
-                        width: widthBar,
-                        left: parseInt(leftBar)+15+'%',
-                        top: topBar,
-                        height: heightBar,
-                        zIndex:-1,
-                        backgroundColor: beforeColorBar}}
-            />
-            <div
-                className='progressRailFill-minho progressBar'
-                style={{position: positionBar, backgroundColor: afterColorBar,
-                        height: heightBar,
-                        width: locVolume*numWidth+'%',
-                        left: parseInt(leftBar)+15+'%',
-                        height: heightBar,
-                        top: topBar,}}
-            />
-            <input 
+            {/* <input 
                 className='progressBar-minho progressBar'
                 style={{position: positionBar,
                         width: widthBar,
@@ -137,7 +135,7 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
                 step='0.01'
                 value={curValue} 
                 // onChange={handleValue} 
-            />
+            /> */}
         </div>
     );
 }

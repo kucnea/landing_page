@@ -209,7 +209,7 @@ function openJiHyeTickTok(){
                     // layout="fill"
                     // objectFit="contain"
                     onClick={openJiHyeYoutube}
-                    style={{ objectFit: 'cover', width: '3%', height: '3%' }}
+                    style={{ objectFit: 'cover', width: '3%', height: '3%',cursor: 'pointer', }}
                     
               />
               &nbsp;
@@ -219,7 +219,7 @@ function openJiHyeTickTok(){
                     // layout="fill"
                     // objectFit="contain"
                     onClick={openJiHyeTickTok}
-                    style={{ objectFit: 'cover', width: '3%', height: '3%' }}
+                    style={{ objectFit: 'cover', width: '3%', height: '3%',cursor: 'pointer', }}
                     
               />
             </a>
