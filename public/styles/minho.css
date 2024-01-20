@@ -95,3 +95,29 @@
   border-right: 2px solid #000; /* 언더바 스타일 설정 */
   animation: blink 1s infinite; /* 1초 주기로 blink 애니메이션 실행 */
 }
+
+.video-player{
+  position: relative;
+}
+
+.video-logo{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.video-bottom-ovl{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnPlay{
+  left: 13%;
+}

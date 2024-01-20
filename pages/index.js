@@ -195,7 +195,7 @@ function openJiHyeYoutube(){
                   />
              </div>
 
-             <MHVideoPlayer filePathVideo='/video/minho-minhoSiteVideo.mp4' boolAutoPlay = {true} boolMute = {true} />
+             <MHVideoPlayer filePathVideo='/video/minho-minhoSiteVideo.mp4' boolAutoPlay = {true} boolMute = {true} boolAutoReplay = {true} boolBusiness={false} vWidth={'50%'} vHeight={'30%'}/>
              <a className='text-white flex items-center justify-center'>
               * 해당 영상은 이지혜 님께서 제작해 주셨습니다. &nbsp;&nbsp;
               {/* <YoutubeOutlined  onClick={openJiHyeYoutube} /> */}
@@ -205,18 +205,23 @@ function openJiHyeYoutube(){
                     // layout="fill"
                     // objectFit="contain"
                     onClick={openJiHyeYoutube}
-                    style={{ objectFit: 'cover', width: '5%', height: '5%' }}
+                    style={{ objectFit: 'cover', width: '3%', height: '3%' }}
                     
               />
+              &nbsp;
               <Image 
                     src={Ticktok}
                     alt='ticktok Icon'
                     // layout="fill"
                     // objectFit="contain"
                     onClick={openJiHyeYoutube}
-                    style={{ objectFit: 'cover', width: '5%', height: '5%' }}
+                    style={{ objectFit: 'cover', width: '3%', height: '3%' }}
                     
               />
+            </a>
+            <a className='text-white flex items-center justify-center'>
+              * 재생하는 플레이어는 자체제작한 플레이어 입니다.<br/>
+              재사용시 출처를 남겨주세요.
             </a>
             
 
