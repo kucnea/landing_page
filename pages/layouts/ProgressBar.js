@@ -103,7 +103,6 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
             />
             <div
                 className='progressRail-minho progressBar'
-                ref={refBar}
                 style={{position: positionBar,
                         width: widthBar,
                         left: parseInt(leftBar)+15+'%',
