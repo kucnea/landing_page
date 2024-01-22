@@ -31,9 +31,14 @@ export default function ProgressBar({isMobile, maxValue, curValue, handleValue, 
           if ( isClickThumb ) {
             var loc;
 
-            if( isMobile) {
-                var touch = e.touches[0];
-                loc = touch.clientX;
+            if( isMobile ) {
+                if( e.touches ){
+                    var touch = e.touches[0];
+                    loc = touch.clientX;
+                } else {
+                    loc = (e.clientX);
+                }
+                
             } else {
                 e.preventDefault();
                 loc = (e.clientX);

@@ -199,7 +199,16 @@ function openJiHyeTickTok(){
                   />
              </div>
 
-             <MHVideoPlayer filePathVideo='/video/minho-minhoSiteVideo.mp4' boolAutoPlay = {true} boolMute = {true} boolAutoReplay = {true} boolBusiness={false} vWidth={'50%'} vHeight={'30%'}/>
+             <MHVideoPlayer 
+                filePathVideo='/video/minho-minhoSiteVideo.mp4' 
+                boolAutoPlay = {true} 
+                boolMute = {true} 
+                boolAutoReplay = {true} 
+                boolBusiness={false} 
+                vWidth={'50%'} 
+                vHeight={'30%'}
+
+             />
              <a className='text-white flex items-center justify-center'>
               * 해당 영상은 이지혜 님께서 제작해 주셨습니다. &nbsp;&nbsp;
               {/* <YoutubeOutlined  onClick={openJiHyeYoutube} /> */}
