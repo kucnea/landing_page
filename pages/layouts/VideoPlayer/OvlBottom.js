@@ -102,7 +102,7 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
         const chgFullScreen = () => {
 
             var video = refVideo.current;
-            console.log("[OvlBottom.js] isFullScreenn : "+isFullScreen);
+            // console.log("[OvlBottom.js] isFullScreenn : "+isFullScreen);
             if( isFullScreen ){
 
                 if (typeof document !== 'undefined') {
@@ -135,7 +135,8 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
         refExpandBtn.current.addEventListener('click', chgFullScreen);
 
         return () => {
-            refExpandBtn.removeEventListener('click', chgFullScreen);
+            if( refExpandBtn.current )
+                refExpandBtn.current.removeEventListener('click', chgFullScreen);
         };
     },[]);
 
@@ -210,6 +211,7 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
                 {FormatTime( refVideo.current? refVideo.current.currentTime : 0)} / 
                 {FormatTime(lengthTotVideo)}
             </a>
+
             <a
                 style={{
                             position:'absolute',
@@ -218,7 +220,6 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
                           }}
                 ref={refExpandBtn}
             >
-                       
                 { isFullScreen != true ?
                     <ExpandOutlined 
                         onMouseOver={ExpandAnimateFontGrow}   

@@ -7,6 +7,7 @@ import OvlBottom from './VideoPlayer/OvlBottom';
 export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, boolAutoPlay, boolMute, boolAutoReplay, boolBusiness, vWidth, vHeight}){
 
     const refVideo = useRef(null);
+    const refPlayer = useRef(null);
 
     const [isMobile,setIsMobile] = useState(false);
     const [isFullScreen,setIsFullScreen] = useState(false);
@@ -31,38 +32,47 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
     const [advInMiddle, setAdvInMiddle] = useState(null);
 
     const mobileWidth = process.env.NEXT_PUBLIC_REACT_APP_MOBILE_SIZE;
-    // useEffect(()=>{
-
-    //     if( boolAutoPlay ){
-            
-    //         refVideo.current.play().catch(error => {
-    //             setStateMute(true);
-    //         });
-
-    //         ((isRun) => {
-
-    //             if( isRun ){
-    //                 refVideo.current.play();
-    //             }
-        
-    //         })(stateMute);
-
-    //     }
-
-    // },[]);
-
+    
     useEffect(()=>{
         const handleResize = () => {
           setIsMobile(window.innerWidth <= mobileWidth);
         };
+
+        const handlePlay = () => {
+          
+          if( !isPlaying && refVideo.current )
+            try {
+              refVideo.current.play();
+              setIsPlaying(true);
+            } catch (error) {
+              setIsPlaying(false);
+            }
+            
+          else if ( isPlaying && refVideo.current )
+            try {
+              refVideo.current.pause();
+              setIsPlaying(false);
+            } catch (error) {
+              setIsPlaying(true);
+            }
+        }
     
         handleResize();
+        // console.log("[MHVideoPlayer.js] isPlaying : "+isPlaying+", boolAutoPlay : "+boolAutoPlay);
         window.addEventListener('resize', handleResize);
+        if( refPlayer.current )
+          refPlayer.current.addEventListener('click', handlePlay);
+        // if( refPlayer.current ) 
+        //   refPlayer.current.addEventListener('mouseover', showFrame);
 
         return () => {
           window.removeEventListener('resize', handleResize);
+          if( refPlayer.current )
+            refPlayer.current.removeEventListener('click', handlePlay);
+          // if( refPlayer ) 
+          //   refPlayer.current.removeEventListener('mouseover', showFrame);
         };
-    },[]);
+    },[isPlaying]);
 
     useEffect(() => {
 
@@ -101,7 +111,9 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
       return () => {
         // if( !isStreaming && lengthTot == null )
         //   video.removeEventListener('loadedmetadata', getLengthTotVideo);
-        video.removeEventListener('timeupdate', handleTimeUpdate);
+        if (video) {
+          video.removeEventListener('timeupdate', handleTimeUpdate);
+        }
       };
 
     }, []);
@@ -114,10 +126,11 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
 
     },[progressRate]);
 
+    /*
     useEffect(()=>{
       setIsPlaying(!refVideo.current.paused);
     },[refVideo]);
-
+    */
     useEffect(() => {
         const playVideo = async () => {
           try {
@@ -134,7 +147,11 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
 
     return (
         <div className='mx-auto'>
-            <div className="video-player mx-auto" style={{width: vWidth, height: vHeight}}>
+            <div className="video-player mx-auto" style={{width: vWidth, height: vHeight}}
+                  ref={refPlayer}
+                  onMouseOver={()=>setIsShowFrame(true)}
+                  onMouseOut={()=>setIsShowFrame(false)}
+                  >
                 <video
                     ref = {refVideo}
                     // controlslist="nodownload"
@@ -147,7 +164,8 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
                     Your browser does not support the video tag.
                     <source src={filePathVideo} type="video/mp4" />
                 </video>
-                <OvlBottom 
+                { ( !isPlaying || isShowFrame ) &&
+                  <OvlBottom 
                     isMobile={isMobile}
                     isFullScreen={isFullScreen}
                     setIsFullScreen={setIsFullScreen}
@@ -157,7 +175,9 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
                     isPlaying={isPlaying}
                     setIsPlaying={setIsPlaying}
                     progressRate={progressRate}
-                />
+                  />
+                }
+                
             </div>
         </div>
     );
