@@ -57,14 +57,14 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
     }
 
     const clickPlay = () => {
-        if( !isPlaying ) {
+        if( !isPlaying && refVideo.current ) {
           refVideo.current.play();
           setIsPlaying(true);
         }
     }
 
     const clickPause = () => {
-        if( isPlaying ) {
+        if( isPlaying && refVideo.current ) {
             refVideo.current.pause();
             setIsPlaying(false);
         }        
@@ -132,7 +132,8 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
             }
         }
 
-        refExpandBtn.current.addEventListener('click', chgFullScreen);
+        if( refExpandBtn.current )
+            refExpandBtn.current.addEventListener('click', chgFullScreen);
 
         return () => {
             if( refExpandBtn.current )
