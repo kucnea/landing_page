@@ -6,7 +6,7 @@ import ImgLogo from '/public/image/LogoMinho_noBack_wide.png';
 import { NotificationOutlined } from '@ant-design/icons';
 import { FormatTime, ExpandAnimateFontGrow, ResetAnimateFontGrow } from '@utils/commonFunc_minho';
 
-export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isStreaming, lengthTotVideo, refVideo, isPlaying, setIsPlaying, progressRate}){
+export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isStreaming, timeCurrent, lengthTotVideo, refVideo, isPlaying, setIsPlaying}){
 
     const [volume, setVolume] = useState(1);
     const [beforeVolume,setBeforeVolume] = useState(1);
@@ -101,7 +101,10 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
     useEffect(()=>{
         const chgFullScreen = () => {
 
-            var video = refVideo.current;
+            var video;
+            if ( refVideo.current ) video = refVideo.current;
+            else return;
+
             // console.log("[OvlBottom.js] isFullScreenn : "+isFullScreen);
             if( isFullScreen ){
 
@@ -209,7 +212,7 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
                          color: 'white',
                          fontSize: styleTextTimer.fontSize,
                          }}>
-                {FormatTime( refVideo.current? refVideo.current.currentTime : 0)} / 
+                {FormatTime( timeCurrent )} / 
                 {FormatTime(lengthTotVideo)}
             </a>
 

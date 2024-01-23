@@ -12,6 +12,7 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
     const [isMobile,setIsMobile] = useState(false);
     const [isFullScreen,setIsFullScreen] = useState(false);
     const [isStreaming,setIsStreaming] = useState( boolStreaming != null ? boolStreaming : false);
+    const [timeCurrent,setTimeCurrent] = useState(0);
     // 스트리밍 프로토콜 사용: HLS나 MPEG-DASH와 같은 스트리밍 프로토콜
     const [lengthTotVideo,setLengthTotVideo] = useState( lengthTot != null ? 
                                                                               isStreaming ? -1
@@ -22,7 +23,7 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
     const [stateMute,setStateMute] = useState(boolMute);
 
     const [nextVideo,setNextVideo] = useState(null);
-    const [progressRate,setProgressRate] = useState(0);
+    // const [progressRate,setProgressRate] = useState(0);
     const [isPlaying,setIsPlaying] = useState(boolAutoPlay);
     const [isShowFrame,setIsShowFrame] = useState(false);
     const [isShowMiddleRecommand,setIsShowMiddleRecommand] = useState(false);
@@ -96,8 +97,8 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
         
         // const rateVideo = (video.currentTime / video.duration) * 100;
         // console.log("[MHVideoPlayer.js] progressRate : " + rateVideo + "%");
-        setProgressRate((video.currentTime / video.duration)*100);
-        
+        // setProgressRate((video.currentTime / video.duration)*100);
+        setTimeCurrent(video.currentTime);
         if( lengthTotVideo == 0 ){
           setLengthTotVideo(video.duration);
         }
@@ -124,7 +125,7 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
       // boolBusiness에 따라 광고유무
       // loop유무에 따라 ClossingRecommand 유무
 
-    },[progressRate]);
+    },[timeCurrent]);
 
     /*
     useEffect(()=>{
@@ -170,11 +171,12 @@ export default function CustomVideo({filePathVideo, lengthTot, boolStreaming, bo
                     isFullScreen={isFullScreen}
                     setIsFullScreen={setIsFullScreen}
                     isStreaming={isStreaming}
+                    timeCurrent={timeCurrent}
                     lengthTotVideo={lengthTotVideo}
                     refVideo={refVideo}
                     isPlaying={isPlaying}
                     setIsPlaying={setIsPlaying}
-                    progressRate={progressRate}
+                    // progressRate={progressRate}
                   />
                 }
                 
