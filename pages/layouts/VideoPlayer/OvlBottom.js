@@ -39,7 +39,8 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
                                                         });
     const [styleExpandBtn,setStyleExpandBtn] = useState({
                                                             left:'95%',
-                                                            fontSize:'120%',
+                                                            fontSize:'140%',
+                                                            top:'calc(-10%)',
                                                         });
     const refHiddenVolume = useRef(null);
     const [hiddenVolume,setHiddenVolume] = useState(1-volume);
@@ -221,6 +222,7 @@ export default function OvlBottom({isMobile, isFullScreen, setIsFullScreen, isSt
                             position:'absolute',
                             left:styleExpandBtn.left,
                             fontSize:styleExpandBtn.fontSize,
+                            top:styleExpandBtn.top,
                           }}
                 ref={refExpandBtn}
             >
